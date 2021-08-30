@@ -20,7 +20,6 @@ mvnw.cmd
 *.iws
 *.iml
 *.ipr
-*.iml
 *.log
 *.log.gz
 
