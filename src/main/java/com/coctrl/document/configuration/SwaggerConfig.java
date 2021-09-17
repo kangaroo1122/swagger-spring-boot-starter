@@ -2,9 +2,11 @@ package com.coctrl.document.configuration;
 
 import com.coctrl.document.exception.ScanPathNotConfiguredException;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +33,6 @@ import static com.google.common.collect.Lists.newArrayList;
 @EnableSwagger2
 @EnableKnife4j
 @EnableConfigurationProperties(SwaggerProperties.class)
-@ConditionalOnProperty(prefix = "coctrl.swagger", name = "enable", havingValue = "true")
 public class SwaggerConfig {
 
     @Autowired
@@ -65,13 +66,20 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private void verify(SwaggerProperties properties){
+    @Bean
+    @ConditionalOnMissingBean(SecurityBasicAuthFilter.class)
+    @ConditionalOnProperty(name = "coctrl.swagger.enable", havingValue = "true")
+    public SecurityBasicAuthFilter securityBasicAuthFilter(SwaggerProperties properties) {
+        return new SecurityBasicAuthFilter(properties.getEnable(), properties.getUsername(), properties.getPassword());
+    }
+
+    private void verify(SwaggerProperties properties) {
         if (properties.getBasePackage() == null) {
             throw new ScanPathNotConfiguredException("请配置controller扫描包");
         }
     }
 
-    private Predicate getPredicate(){
+    private Predicate getPredicate() {
         String[] split = properties.getBasePackage().split(",");
         Predicate predicate = null;
         for (String s : split) {
@@ -94,12 +102,12 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private List<ApiKey> securitySchemes(){
+    private List<ApiKey> securitySchemes() {
         return newArrayList(
                 new ApiKey(properties.getHeader(), properties.getHeader(), "header"));
     }
 
-    private List<SecurityContext> securityContexts(){
+    private List<SecurityContext> securityContexts() {
         return newArrayList(
                 SecurityContext.builder()
                         .securityReferences(defaultAuth())
@@ -108,7 +116,7 @@ public class SwaggerConfig {
         );
     }
 
-    private List<SecurityReference> defaultAuth(){
+    private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;

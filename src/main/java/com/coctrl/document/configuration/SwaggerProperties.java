@@ -20,7 +20,17 @@ public class SwaggerProperties {
     /**
      * 是否允许访问
      */
-    private Boolean enable;
+    private Boolean enable = false;
+
+    /**
+     * 访问用户名
+     */
+    private String username = "admin";
+
+    /**
+     * 访问密码
+     */
+    private String password = "123321";
 
     /**
      * 分组名
@@ -40,7 +50,7 @@ public class SwaggerProperties {
     /**
      * 项目信息
      */
-    private AppInfo appInfo;
+    private AppInfo appInfo = new AppInfo();
 
     @Data
     public static class AppInfo {
@@ -77,7 +87,7 @@ public class SwaggerProperties {
         /**
          * 接口作者联系方式
          */
-        private Contact contact;
+        private Contact contact = new Contact();
 
         @Data
         public static class Contact {
