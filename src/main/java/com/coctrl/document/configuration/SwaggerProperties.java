@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 public class SwaggerProperties {
 
     /**
-     * 是否允许访问
+     * 是否添加认证访问
      */
-    private Boolean enable = false;
+    private Boolean certifiable = false;
 
     /**
      * 访问用户名

@@ -68,9 +68,9 @@ public class SwaggerConfig {
 
     @Bean
     @ConditionalOnMissingBean(SecurityBasicAuthFilter.class)
-    @ConditionalOnProperty(name = "coctrl.swagger.enable", havingValue = "true")
+    @ConditionalOnProperty(name = "coctrl.swagger.certifiable", havingValue = "true")
     public SecurityBasicAuthFilter securityBasicAuthFilter(SwaggerProperties properties) {
-        return new SecurityBasicAuthFilter(properties.getEnable(), properties.getUsername(), properties.getPassword());
+        return new SecurityBasicAuthFilter(properties.getCertifiable(), properties.getUsername(), properties.getPassword());
     }
 
     private void verify(SwaggerProperties properties) {
