@@ -76,8 +76,8 @@ public class SwaggerConfig {
 
     @Bean
     @ConditionalOnMissingBean(ProductionSecurityFilter.class)
-    @ConditionalOnProperty(name = "coctrl.swagger.prod",havingValue = "true")
-    public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties){
+    @ConditionalOnProperty(name = "coctrl.swagger.prod", havingValue = "true")
+    public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties) {
         return new ProductionSecurityFilter(properties.getProd());
     }
 
