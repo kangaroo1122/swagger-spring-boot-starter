@@ -19,7 +19,11 @@ import java.lang.reflect.Field;
 import java.util.function.BiFunction;
 
 /**
- * @author jam
+ * 类 GroupOperationBuilderPlugin 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class GroupOperationBuilderPlugin implements OperationBuilderPlugin {
     public static final Field REQUEST_CONTEXT = ReflectionUtils.findField(OperationContext.class, "requestContext");

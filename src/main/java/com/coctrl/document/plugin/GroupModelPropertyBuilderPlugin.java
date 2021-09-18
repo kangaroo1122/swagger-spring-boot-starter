@@ -20,7 +20,11 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 /**
- * @author jam
+ * 类 GroupModelPropertyBuilderPlugin 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class GroupModelPropertyBuilderPlugin implements ModelPropertyBuilderPlugin {
 

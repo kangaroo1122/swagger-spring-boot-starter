@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jam
- * @date 2021/8/4 4:28 下午
+ * 类 EnumNumberValidator 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class EnumNumberValidator implements ConstraintValidator<EnumInteger, Number> {
     private List<Integer> enumStringList;

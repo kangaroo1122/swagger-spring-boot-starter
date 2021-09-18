@@ -10,8 +10,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -53,10 +52,14 @@ import static springfox.documentation.schema.Types.isVoid;
 import static springfox.documentation.schema.Types.typeNameFor;
 
 /**
- * @author jam
+ * 类 GroupModelAttributeParameterExpander 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
+@Slf4j
 public class GroupModelAttributeParameterExpander extends ModelAttributeParameterExpander {
-    private static final Logger LOG = LoggerFactory.getLogger(ModelAttributeParameterExpander.class);
     private final FieldProvider fields;
     private final AccessorsProvider accessors;
     private final EnumTypeDeterminer enumTypeDeterminer;
@@ -104,7 +107,7 @@ public class GroupModelAttributeParameterExpander extends ModelAttributeParamete
                 .uniqueIndex(ResolvedMember::getName);
 
 
-        LOG.debug("Expanding parameter type: {}", context.getParamType());
+        log.debug("Expanding parameter type: {}", context.getParamType());
         final AlternateTypeProvider alternateTypeProvider = context.getDocumentationContext().getAlternateTypeProvider();
 
         FluentIterable<ModelAttributeField> attributes =
@@ -118,7 +121,7 @@ public class GroupModelAttributeParameterExpander extends ModelAttributeParamete
                 .filter(not(simpleType()))
                 .filter(not(recursiveType(context)));
         for (ModelAttributeField each : expendables) {
-            LOG.debug("Attempting to expand expandable property: {}", each.getName());
+            log.debug("Attempting to expand expandable property: {}", each.getName());
             parameters.addAll(
                     expand(
                             context.childContext(
@@ -130,7 +133,7 @@ public class GroupModelAttributeParameterExpander extends ModelAttributeParamete
         FluentIterable<ModelAttributeField> collectionTypes = attributes
                 .filter(and(isCollection(), not(recursiveCollectionItemType(context.getParamType()))));
         for (ModelAttributeField each : collectionTypes) {
-            LOG.debug("Attempting to expand collection/array field: {}", each.getName());
+            log.debug("Attempting to expand collection/array field: {}", each.getName());
 
             ResolvedType itemType = collectionElementType(each.getFieldType());
             if (Types.isBaseType(itemType) || enumTypeDeterminer.isEnum(itemType.getErasedType())) {
@@ -205,10 +208,10 @@ public class GroupModelAttributeParameterExpander extends ModelAttributeParamete
             ExpansionContext context,
             ModelAttributeField each,
             DocumentationType documentationType) {
-        LOG.debug("Attempting to expand field: {}", each);
+        log.debug("Attempting to expand field: {}", each);
         String dataTypeName = Optional.fromNullable(typeNameFor(each.getFieldType().getErasedType()))
                 .or(each.getFieldType().getErasedType().getSimpleName());
-        LOG.debug("Building parameter for field: {}, with type: ", each, each.getFieldType());
+        log.debug("Building parameter for field: {}, with type: ", each, each.getFieldType());
         ParameterExpansionContext parameterExpansionContext = new ParameterExpansionContext(
                 dataTypeName,
                 parentName,
@@ -297,7 +300,7 @@ public class GroupModelAttributeParameterExpander extends ModelAttributeParamete
             return FluentIterable.from(getBeanInfo(clazz).getPropertyDescriptors())
                     .toSet();
         } catch (IntrospectionException e) {
-            LOG.warn(String.format("Failed to get bean properties on (%s)", clazz), e);
+            log.warn(String.format("Failed to get bean properties on (%s)", clazz), e);
         }
         return newHashSet();
     }

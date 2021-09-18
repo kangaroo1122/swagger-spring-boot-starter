@@ -7,7 +7,11 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * @author jam
+ * 类 GroupDocumentationType 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class GroupDocumentationType extends DocumentationType {
     public static final String DELIMITER = "_";

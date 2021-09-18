@@ -12,7 +12,11 @@ import springfox.documentation.spi.schema.contexts.ModelContext;
 import java.lang.reflect.Field;
 
 /**
- * @author jam
+ * 类 GroupModelBuilderPlugin 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class GroupModelBuilderPlugin implements ModelBuilderPlugin {
     public static final Field TYPE = ReflectionUtils.findField(ModelRef.class, "type");

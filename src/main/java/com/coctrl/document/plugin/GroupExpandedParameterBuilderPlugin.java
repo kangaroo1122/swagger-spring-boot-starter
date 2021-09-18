@@ -9,7 +9,11 @@ import springfox.documentation.spi.service.contexts.ParameterExpansionContext;
 import java.lang.annotation.Annotation;
 
 /**
- * @author jam
+ * 类 GroupExpandedParameterBuilderPlugin 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class GroupExpandedParameterBuilderPlugin implements ExpandedParameterBuilderPlugin {
     @Override

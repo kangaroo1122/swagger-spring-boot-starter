@@ -12,7 +12,11 @@ import java.lang.reflect.Field;
 import java.util.Set;
 
 /**
- * @author jam
+ * 类 GroupOperationModelsProviderPlugin 功能描述：
+ *
+ * @author kangaroo hy
+ * @version 0.0.1
+ * @date 2021/09/18 11:16
  */
 public class GroupOperationModelsProviderPlugin implements OperationModelsProviderPlugin {
     public static final Field CONTEXTS = ReflectionUtils.findField(OperationModelContextsBuilder.class, "contexts");
