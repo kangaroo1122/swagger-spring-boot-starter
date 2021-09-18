@@ -21,7 +21,7 @@ import springfox.documentation.swagger.common.SwaggerPluginSupport;
  */
 @Configuration
 @ConditionalOnClass(Docket.class)
-public class ValidGroupConfig {
+public class ValidGroupAutoConfiguration {
 
     @Bean
     @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 1000)

@@ -34,7 +34,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @EnableSwagger2
 @EnableKnife4j
 @EnableConfigurationProperties(SwaggerProperties.class)
-public class SwaggerConfig {
+public class SwaggerAutoConfiguration {
 
     @Autowired
     private SwaggerProperties properties;
