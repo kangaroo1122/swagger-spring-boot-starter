@@ -2,6 +2,7 @@ package com.coctrl.document.configuration;
 
 import com.coctrl.document.exception.ScanPathNotConfiguredException;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;
 import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -71,6 +72,13 @@ public class SwaggerConfig {
     @ConditionalOnProperty(name = "coctrl.swagger.certifiable", havingValue = "true")
     public SecurityBasicAuthFilter securityBasicAuthFilter(SwaggerProperties properties) {
         return new SecurityBasicAuthFilter(properties.getCertifiable(), properties.getUsername(), properties.getPassword());
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(ProductionSecurityFilter.class)
+    @ConditionalOnProperty(name = "coctrl.swagger.prod",havingValue = "true")
+    public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties){
+        return new ProductionSecurityFilter(properties.getProd());
     }
 
     private void verify(SwaggerProperties properties) {

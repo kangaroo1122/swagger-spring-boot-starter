@@ -18,6 +18,11 @@ import org.springframework.stereotype.Component;
 public class SwaggerProperties {
 
     /**
+     * 是否生产环境
+     */
+    private Boolean prod = false;
+
+    /**
      * 是否添加认证访问
      */
     private Boolean certifiable = false;

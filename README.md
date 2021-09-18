@@ -31,3 +31,13 @@ coctrl:
     username: admin # 默认admin
     password: 123321 # 默认123321
 ```
+
+生产屏蔽
+
+```yaml
+coctrl:
+  swagger:
+    groupName: 默认分组
+    base-package: com.coctrl.swagger.controller,com.coctrl.admin.controller
+    prod: true
+```
