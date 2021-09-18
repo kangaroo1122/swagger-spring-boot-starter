@@ -20,7 +20,7 @@ coctrl:
     base-package: com.coctrl.swagger.controller,com.coctrl.admin.controller
 ```
 
-认证访问
+认证访问（security项目开启此配置会发生一些莫名其妙的问题，建议生产环境关闭swagger访问、shiro项目可正常配置）
 
 ```yaml
 coctrl:
