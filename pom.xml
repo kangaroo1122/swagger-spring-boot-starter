@@ -13,6 +13,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.1.18.RELEASE</spring-boot.version>
+        <spring-web.version>4.3.7.RELEASE</spring-web.version>
+        <jakarta-validation.version>2.0.2</jakarta-validation.version>
+        <jackson-databind.version>2.10.5</jackson-databind.version>
         <knife4j.version>2.0.5</knife4j.version>
         <swagger-model.version>1.5.24</swagger-model.version>
         <lombok.version>1.18.20</lombok.version>
@@ -28,6 +31,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-web.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta-validation.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+            <scope>provided</scope>
         </dependency>
         <!-- knife4j ui界面-->
         <dependency>
