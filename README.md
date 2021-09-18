@@ -41,3 +41,33 @@ coctrl:
     base-package: com.coctrl.swagger.controller,com.coctrl.admin.controller
     prod: true
 ```
+
+新增或编辑接口，实体分组显示
+
+controller层入参上添加分组信息，如：
+
+新增：ValidGroup.Create.class
+```java
+public RestResult<String> insertUser(@RequestBody @Validated(ValidGroup.Create.class) UserBO user) {
+        return usersService.insertUser(user);
+        }
+```
+
+编辑：ValidGroup.Update.class
+```java
+public RestResult<String> insertUser(@RequestBody @Validated(ValidGroup.Update.class) UserBO user) {
+        return usersService.insertUser(user);
+        }
+```
+
+入参实体中：
+```java
+public class UserBO implements Serializable {
+    private static final long serialVersionUID = 5699245096095831445L;
+
+    @ApiModelProperty(value = "ID")
+    @Null(groups = ValidGroup.Create.class)
+    @NotNull(groups = ValidGroup.Update.class, message = "ID不可为空")
+    private Long id;
+}
+```
