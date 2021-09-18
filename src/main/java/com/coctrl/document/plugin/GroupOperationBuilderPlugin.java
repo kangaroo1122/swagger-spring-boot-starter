@@ -34,19 +34,6 @@ public class GroupOperationBuilderPlugin implements OperationBuilderPlugin {
         TYPE.setAccessible(true);
     }
 
-//    public static Class[] getGroupsFromResolvedMethodParameter(ResolvedMethodParameter resolvedMethodParameter) {
-//        Optional<Validated> opValidated = resolvedMethodParameter.findAnnotation(Validated.class);
-//        if (opValidated.isPresent()) {
-//            return opValidated.get().value();
-//        } else {
-//            Optional<Valid> opValid = resolvedMethodParameter.findAnnotation(Valid.class);
-//            if (opValid.isPresent()) {
-//                return new Class[0];
-//            }
-//        }
-//        return null;
-//    }
-
     public static <T, R> Class[] getGroups(T t, BiFunction<T, Class<? extends Annotation>, Optional<R>> findAnnotation) {
         Optional<R> opValidated = findAnnotation.apply(t, Validated.class);
         if (opValidated.isPresent()) {

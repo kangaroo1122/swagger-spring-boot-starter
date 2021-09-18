@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * @author jam
  */
 public class GroupDocumentationType extends DocumentationType {
+    public static final String DELIMITER = "_";
     public Class[] groups;
 
     public GroupDocumentationType(String name, String version) {
@@ -26,11 +27,11 @@ public class GroupDocumentationType extends DocumentationType {
     }
 
     public static String buildModelRefId(String refId, Class[] groups) {
-        String suffix = Arrays.stream(groups).map(Class::getSimpleName).collect(Collectors.joining("_"));
-        if (refId.endsWith("_" + suffix)) {
+        String suffix = Arrays.stream(groups).map(Class::getSimpleName).collect(Collectors.joining(DELIMITER));
+        if (refId.endsWith(DELIMITER + suffix)) {
             return refId;
         }
-        return refId + "_" + suffix;
+        return refId + DELIMITER + suffix;
     }
 
     public String buildModelRefId(String refId) {
