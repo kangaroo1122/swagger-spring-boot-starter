@@ -1,6 +1,6 @@
 package com.coctrl.document.configuration;
 
-import com.coctrl.document.exception.ScanPathNotConfiguredException;
+import com.coctrl.document.exception.PropertiesNotFoundException;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;
 import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
@@ -36,12 +36,18 @@ import static com.google.common.collect.Lists.newArrayList;
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerAutoConfiguration {
 
+    private final SwaggerProperties properties;
+
     @Autowired
-    private SwaggerProperties properties;
+    public SwaggerAutoConfiguration(SwaggerProperties properties){
+        this.properties = properties;
+        if (properties.getBasePackage() == null) {
+            throw new PropertiesNotFoundException("请配置controller扫描包");
+        }
+    }
 
     @Bean(value = "defaultApi")
     public Docket defaultApi() {
-        verify(properties);
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
@@ -56,7 +62,6 @@ public class SwaggerAutoConfiguration {
 
     @Bean(value = "pubApi")
     public Docket pubApi() {
-        verify(properties);
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
@@ -79,12 +84,6 @@ public class SwaggerAutoConfiguration {
     @ConditionalOnProperty(name = "coctrl.swagger.prod", havingValue = "true")
     public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties) {
         return new ProductionSecurityFilter(properties.getProd());
-    }
-
-    private void verify(SwaggerProperties properties) {
-        if (properties.getBasePackage() == null) {
-            throw new ScanPathNotConfiguredException("请配置controller扫描包");
-        }
     }
 
     private Predicate getPredicate() {
