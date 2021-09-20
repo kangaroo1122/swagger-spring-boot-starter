@@ -55,8 +55,8 @@ public RestResult<String> insertUser(@RequestBody @Validated(ValidGroup.Create.c
 
 编辑：ValidGroup.Update.class
 ```java
-public RestResult<String> insertUser(@RequestBody @Validated(ValidGroup.Update.class) UserBO user) {
-        return usersService.insertUser(user);
+public RestResult<String> updateUser(@RequestBody @Validated(ValidGroup.Update.class) UserBO user) {
+        return usersService.updateUser(user);
         }
 ```
 
