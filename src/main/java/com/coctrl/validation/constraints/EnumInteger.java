@@ -1,4 +1,4 @@
-package com.coctrl.valid.annotation;
+package com.coctrl.validation.constraints;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
