@@ -1,7 +1,7 @@
 package com.coctrl.document.plugin;
 
-import com.coctrl.validation.constraints.EnumInteger;
-import com.coctrl.validation.constraints.EnumString;
+import com.coctrl.validator.constraints.EnumInteger;
+import com.coctrl.validator.constraints.EnumString;
 import com.fasterxml.jackson.databind.introspect.AnnotatedField;
 import springfox.documentation.builders.ModelPropertyBuilder;
 import springfox.documentation.service.AllowableListValues;

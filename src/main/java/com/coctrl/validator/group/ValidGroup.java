@@ -1,4 +1,4 @@
-package com.coctrl.validation.group;
+package com.coctrl.validator.group;
 
 import javax.validation.groups.Default;
 
