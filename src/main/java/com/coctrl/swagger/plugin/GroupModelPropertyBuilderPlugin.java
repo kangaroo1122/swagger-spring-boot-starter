@@ -1,4 +1,4 @@
-package com.coctrl.document.plugin;
+package com.coctrl.swagger.plugin;
 
 import com.coctrl.validator.constraints.EnumInteger;
 import com.coctrl.validator.constraints.EnumString;

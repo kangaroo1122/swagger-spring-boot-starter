@@ -1,6 +1,6 @@
-package com.coctrl.document.configuration;
+package com.coctrl.swagger.configuration;
 
-import com.coctrl.document.plugin.*;
+import com.coctrl.swagger.plugin.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

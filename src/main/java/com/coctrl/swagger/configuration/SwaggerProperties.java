@@ -1,4 +1,4 @@
-package com.coctrl.document.configuration;
+package com.coctrl.swagger.configuration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

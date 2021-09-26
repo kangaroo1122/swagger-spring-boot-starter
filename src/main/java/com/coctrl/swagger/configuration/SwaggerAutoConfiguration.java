@@ -1,11 +1,9 @@
-package com.coctrl.document.configuration;
+package com.coctrl.swagger.configuration;
 
-import com.coctrl.document.exception.PropertiesNotFoundException;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;
 import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -41,9 +39,6 @@ public class SwaggerAutoConfiguration {
     @Autowired
     public SwaggerAutoConfiguration(SwaggerProperties properties){
         this.properties = properties;
-        if (properties.getBasePackage() == null) {
-            throw new PropertiesNotFoundException("请配置controller扫描包");
-        }
     }
 
     @Bean(value = "defaultApi")
@@ -53,7 +48,7 @@ public class SwaggerAutoConfiguration {
                 .apiInfo(apiInfo())
                 .groupName(properties.getGroupName() + "-待认证")
                 .select()
-                .apis(getPredicate())
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.regex("^((?!pub).)*$"))
                 .build()
                 .securitySchemes(securitySchemes())
@@ -67,7 +62,7 @@ public class SwaggerAutoConfiguration {
                 .apiInfo(apiInfo())
                 .groupName(properties.getGroupName() + "-无认证")
                 .select()
-                .apis(getPredicate())
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.regex("^.*pub.*$"))
                 .build();
     }
@@ -84,16 +79,6 @@ public class SwaggerAutoConfiguration {
     @ConditionalOnProperty(name = "coctrl.swagger.prod", havingValue = "true")
     public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties) {
         return new ProductionSecurityFilter(properties.getProd());
-    }
-
-    private Predicate getPredicate() {
-        String[] split = properties.getBasePackage().split(",");
-        Predicate predicate = null;
-        for (String s : split) {
-            Predicate secPredicate = RequestHandlerSelectors.basePackage(s);
-            predicate = predicate == null ? secPredicate : Predicates.or(secPredicate, predicate);
-        }
-        return predicate;
     }
 
     private ApiInfo apiInfo() {

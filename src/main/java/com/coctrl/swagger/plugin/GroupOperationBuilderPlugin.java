@@ -1,4 +1,4 @@
-package com.coctrl.document.plugin;
+package com.coctrl.swagger.plugin;
 
 import com.google.common.base.Optional;
 import org.springframework.http.HttpStatus;

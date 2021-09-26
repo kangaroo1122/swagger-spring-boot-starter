@@ -1,4 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
-  com.coctrl.document.configuration.SwaggerAutoConfiguration,\
-  com.coctrl.document.configuration.ValidGroupAutoConfiguration
+  com.coctrl.swagger.configuration.SwaggerAutoConfiguration,\
+  com.coctrl.swagger.configuration.ValidGroupAutoConfiguration

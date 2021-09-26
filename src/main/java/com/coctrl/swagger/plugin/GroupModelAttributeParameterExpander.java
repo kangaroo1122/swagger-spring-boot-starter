@@ -1,4 +1,4 @@
-package com.coctrl.document.plugin;
+package com.coctrl.swagger.plugin;
 
 import com.fasterxml.classmate.ResolvedType;
 import com.fasterxml.classmate.members.ResolvedField;
