@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.coctrl</groupId>
     <artifactId>swagger-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.5</version>
     <name>swagger-spring-boot-starter</name>
     <description>swagger2文档封装工具</description>
 
