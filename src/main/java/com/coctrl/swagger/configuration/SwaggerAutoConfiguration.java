@@ -49,7 +49,7 @@ public class SwaggerAutoConfiguration {
                 .groupName(properties.getGroupName() + "-待认证")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .paths(PathSelectors.regex("^((?!pub/).)*$"))
+                .paths(PathSelectors.regex(properties.getAuthc()))
                 .build()
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts());
@@ -63,7 +63,7 @@ public class SwaggerAutoConfiguration {
                 .groupName(properties.getGroupName() + "-无认证")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .paths(PathSelectors.regex("^.*pub/.*$"))
+                .paths(PathSelectors.regex(properties.getAnon()))
                 .build();
     }
 
@@ -103,7 +103,7 @@ public class SwaggerAutoConfiguration {
         return newArrayList(
                 SecurityContext.builder()
                         .securityReferences(defaultAuth())
-                        .forPaths(PathSelectors.regex("^((?!pub/).)*$"))
+                        .forPaths(PathSelectors.regex(properties.getAuthc()))
                         .build()
         );
     }

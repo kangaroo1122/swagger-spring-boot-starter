@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * 需要认证分组的路径，不包含 pub 路径 - 正则：^((?!pub).)*$ <br>
- * 不需要认证分组的路径，包含 pub - 正则：^.*pub.*$
- *
+ * 需要认证分组的路径，不包含 pub 路径<br>
+ * 不需要认证分组的路径，包含 pub<br>
+ * 可自定义配置，未生效时，可尝试用英文单引号将内容引起来
  * @author kangaroo hy
  * @date 2020/4/25
  * @since 0.0.1
@@ -43,14 +43,21 @@ public class SwaggerProperties {
     private String groupName = "默认分组";
 
     /**
-     * 扫描包路径，多个用英文逗号（ , ）隔开
-     */
-    private String basePackage;
-
-    /**
      * 授权header
      */
     private String header = "token";
+
+    /**
+     * 待认证 路径正则<br/>
+     * 配置未生效时，可尝试用英文单引号将内容引起来
+     */
+    private String authc = "^((?!/pub/).)*$";
+
+    /**
+     * 无认证 路径正则<br/>
+     * 配置未生效时，可尝试用英文单引号将内容引起来
+     */
+    private String anon = "^.*/pub/.*$";
 
     /**
      * 项目信息
