@@ -18,7 +18,7 @@
         <jackson-databind.version>2.10.5</jackson-databind.version>
         <knife4j.version>2.0.5</knife4j.version>
         <swagger-model.version>1.5.24</swagger-model.version>
-        <lombok.version>1.18.20</lombok.version>
+        <lombok.version>1.18.24</lombok.version>
     </properties>
 
     <dependencies>
