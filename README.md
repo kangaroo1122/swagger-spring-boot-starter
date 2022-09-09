@@ -1,6 +1,20 @@
-#swagger-spring-boot-starter
+# swagger-spring-boot-starter
 
 knife4j 2.0.5 封装工具包
+
+### maven
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.kangaroohy/swagger-spring-boot-starter.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.kangaroohy%22%20AND%20a%3A%swagger-spring-boot-starter%22)
+
+~~~xml
+<dependency>
+  <groupId>com.kangaroohy</groupId>
+  <artifactId>swagger-spring-boot-starter</artifactId>
+  <version>1.0.0</version>
+</dependency>
+~~~
+
+### 使用
 
 默认情况下，只需要controller层添加注解 @Api 即可自动扫描接口
 
@@ -75,6 +89,8 @@ kangaroohy:
 
 - 分组一-需认证
 - 分组二-无认证
+
+### 分组校验
 
 新增或编辑接口，实体分组显示
 
