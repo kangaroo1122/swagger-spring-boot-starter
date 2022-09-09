@@ -4,6 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 需要认证分组的路径，不包含 pub 路径<br>
  * 不需要认证分组的路径，包含 pub<br>
@@ -60,9 +63,32 @@ public class SwaggerProperties {
     private String anon = "^.*/pub/.*$";
 
     /**
+     * 分组信息
+     */
+    private List<Group> group = new ArrayList<>();
+
+    /**
      * 项目信息
      */
     private AppInfo appInfo = new AppInfo();
+
+    @Data
+    public static class Group {
+        /**
+         * 分组名称
+         */
+        private String groupName;
+
+        /**
+         * 扫描路径
+         */
+        private String apis;
+
+        /**
+         * 分组是否需要验证
+         */
+        private Boolean certifiable = false;
+    }
 
     @Data
     public static class AppInfo {

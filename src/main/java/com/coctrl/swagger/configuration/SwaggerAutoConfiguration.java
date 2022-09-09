@@ -5,6 +5,7 @@ import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;
 import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -36,9 +37,45 @@ public class SwaggerAutoConfiguration {
 
     private final SwaggerProperties properties;
 
+    private final DefaultListableBeanFactory context;
+
     @Autowired
-    public SwaggerAutoConfiguration(SwaggerProperties properties){
+    public SwaggerAutoConfiguration(SwaggerProperties properties, DefaultListableBeanFactory context){
         this.properties = properties;
+        this.context = context;
+        config();
+    }
+
+    private void config() {
+        if (properties.getGroup() != null) {
+            List<SwaggerProperties.Group> groupList = properties.getGroup();
+            for (int i = 0; i < groupList.size(); i++) {
+                SwaggerProperties.Group group = groupList.get(i);
+                Docket docket;
+                if (group.getCertifiable()) {
+                    docket = new Docket(DocumentationType.SWAGGER_2)
+                            .useDefaultResponseMessages(false)
+                            .apiInfo(apiInfo())
+                            .groupName(group.getGroupName() + "-需认证")
+                            .select()
+                            .apis(RequestHandlerSelectors.basePackage(group.getApis()))
+                            .paths(PathSelectors.any())
+                            .build()
+                            .securitySchemes(securitySchemes())
+                            .securityContexts(securityContexts());
+                } else {
+                    docket = new Docket(DocumentationType.SWAGGER_2)
+                            .useDefaultResponseMessages(false)
+                            .apiInfo(apiInfo())
+                            .groupName(group.getGroupName() + "-无认证")
+                            .select()
+                            .apis(RequestHandlerSelectors.basePackage(group.getApis()))
+                            .paths(PathSelectors.any())
+                            .build();
+                }
+                context.registerSingleton("swaggerGroup" + i, docket);
+            }
+        }
     }
 
     @Bean(value = "defaultApi")
