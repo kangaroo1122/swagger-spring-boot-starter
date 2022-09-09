@@ -32,6 +32,50 @@ coctrl:
     prod: true
 ```
 
+扫描方式分两种（也可共存）
+
+- 基于 Api.class 注解扫描
+- 基于包路径扫描
+
+方式一
+
+默认以接口路径中是否有`/pub`来区分接口是否需要认证访问
+
+此时，系统中默认只有两个分组
+
+- 默认分组-需认证
+- 默认分组-无认证
+
+可配置正则调整匹配条件
+```yaml
+coctrl:
+  swagger:
+    anon: '^.*/pub/.*$'
+    authc: '^((?!/pub/).)*$'
+```
+
+方式二
+
+通过配置的包路径去扫描对应接口
+
+可配置分组信息
+```yaml
+coctrl:
+  swagger:
+    group:
+      - group-name: 分组一
+        apis: com.kangaroohy.controller.auth
+        certifiable: true
+      - group-name: 分组二
+        apis: com.kangaroohy.controller.pub
+        certifiable: false
+```
+
+此时，显示的分组会新增以下两个
+
+- 分组一-需认证
+- 分组二-无认证
+
 新增或编辑接口，实体分组显示
 
 controller层入参上添加分组信息，如：
