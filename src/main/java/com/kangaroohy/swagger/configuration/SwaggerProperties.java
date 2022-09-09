@@ -1,8 +1,11 @@
-package com.coctrl.swagger.configuration;
+package com.kangaroohy.swagger.configuration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 需要认证分组的路径，不包含 pub 路径<br>
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "coctrl.swagger")
+@ConfigurationProperties(prefix = "kangaroohy.swagger")
 public class SwaggerProperties {
 
     /**
@@ -60,9 +63,32 @@ public class SwaggerProperties {
     private String anon = "^.*/pub/.*$";
 
     /**
+     * 分组信息
+     */
+    private List<Group> group = new ArrayList<>();
+
+    /**
      * 项目信息
      */
     private AppInfo appInfo = new AppInfo();
+
+    @Data
+    public static class Group {
+        /**
+         * 分组名称
+         */
+        private String groupName;
+
+        /**
+         * 扫描路径
+         */
+        private String apis;
+
+        /**
+         * 分组是否需要验证
+         */
+        private Boolean certifiable = false;
+    }
 
     @Data
     public static class AppInfo {
@@ -84,17 +110,17 @@ public class SwaggerProperties {
         /**
          * 服务说明url，服务条款
          */
-        private String termsOfServiceUrl = "http//www.coctrl.com";
+        private String termsOfServiceUrl = "http//www.kangaroohy.com";
 
         /**
          * licence，许可证
          */
-        private String license = "coctrl";
+        private String license = "kangaroohy";
 
         /**
          * license url，许可网址
          */
-        private String licenseUrl = "www.coctrl.com";
+        private String licenseUrl = "www.kangaroohy.com";
 
         /**
          * 接口作者联系方式
@@ -106,17 +132,17 @@ public class SwaggerProperties {
             /**
              * 用户名
              */
-            private String name = "重庆格工自动化控制设备有限公司";
+            private String name = "kangaroohy";
 
             /**
              * 联系地址
              */
-            private String url = "www.coctrl.com";
+            private String url = "www.kangaroohy.com";
 
             /**
              * 邮箱
              */
-            private String email = "server@coctrl.com";
+            private String email = "server@kangaroohy.com";
         }
     }
 }

@@ -9,7 +9,7 @@ knife4j 2.0.5 封装工具包
 访问地址：http://localhost:{port}/doc.html
 
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     ......
 ```
@@ -17,7 +17,7 @@ coctrl:
 认证访问
 
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     certifiable: true
     username: admin # 默认admin
@@ -27,7 +27,7 @@ coctrl:
 生产屏蔽
 
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     prod: true
 ```

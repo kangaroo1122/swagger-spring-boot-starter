@@ -1,4 +1,4 @@
-package com.coctrl.validator.constraints;
+package com.kangaroohy.validator.constraints;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

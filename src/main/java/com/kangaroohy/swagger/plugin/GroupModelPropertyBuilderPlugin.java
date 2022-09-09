@@ -1,7 +1,7 @@
-package com.coctrl.swagger.plugin;
+package com.kangaroohy.swagger.plugin;
 
-import com.coctrl.validator.constraints.EnumInteger;
-import com.coctrl.validator.constraints.EnumString;
+import com.kangaroohy.validator.constraints.EnumInteger;
+import com.kangaroohy.validator.constraints.EnumString;
 import com.fasterxml.jackson.databind.introspect.AnnotatedField;
 import springfox.documentation.builders.ModelPropertyBuilder;
 import springfox.documentation.service.AllowableListValues;

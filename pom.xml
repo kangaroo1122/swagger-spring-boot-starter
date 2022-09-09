@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.coctrl</groupId>
+    <groupId>com.kangaroohy</groupId>
     <artifactId>swagger-spring-boot-starter</artifactId>
-    <version>0.0.5</version>
+    <version>1.0.0</version>
     <name>swagger-spring-boot-starter</name>
-    <description>swagger2文档封装工具</description>
+    <description>swagger2文档基于knife4j二次封装工具</description>
 
     <properties>
         <java.version>1.8</java.version>

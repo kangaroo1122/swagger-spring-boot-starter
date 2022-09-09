@@ -1,4 +1,4 @@
-package com.coctrl.validator.group;
+package com.kangaroohy.validator.group;
 
 import javax.validation.groups.Default;
 
