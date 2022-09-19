@@ -2,6 +2,8 @@
 
 knife4j 2.0.5 封装工具包
 
+使用指南可参考：https://blog.csdn.net/Vampire_1122/article/details/126799595
+
 ### maven
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.kangaroohy/swagger-spring-boot-starter.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.kangaroohy%22%20AND%20a%3A%swagger-spring-boot-starter%22)
