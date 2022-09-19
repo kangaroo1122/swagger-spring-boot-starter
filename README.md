@@ -2,6 +2,8 @@
 
 knife4j 2.0.5 封装工具包
 
+使用指南可参考：https://blog.csdn.net/Vampire_1122/article/details/126799595
+
 默认情况下，只需要controller层添加注解 @Api 即可自动扫描接口
 
 若要更新配置信息，查看yml提示
