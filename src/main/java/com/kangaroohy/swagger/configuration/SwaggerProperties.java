@@ -110,17 +110,17 @@ public class SwaggerProperties {
         /**
          * 服务说明url，服务条款
          */
-        private String termsOfServiceUrl = "http//www.kangaroohy.com";
+        private String termsOfServiceUrl = "";
 
         /**
          * licence，许可证
          */
-        private String license = "kangaroohy";
+        private String license = "";
 
         /**
          * license url，许可网址
          */
-        private String licenseUrl = "www.kangaroohy.com";
+        private String licenseUrl = "";
 
         /**
          * 接口作者联系方式
@@ -132,17 +132,17 @@ public class SwaggerProperties {
             /**
              * 用户名
              */
-            private String name = "kangaroohy";
+            private String name = "";
 
             /**
              * 联系地址
              */
-            private String url = "www.kangaroohy.com";
+            private String url = "";
 
             /**
              * 邮箱
              */
-            private String email = "server@kangaroohy.com";
+            private String email = "";
         }
     }
 }

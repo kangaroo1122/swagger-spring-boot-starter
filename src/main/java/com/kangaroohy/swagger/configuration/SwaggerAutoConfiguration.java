@@ -106,14 +106,14 @@ public class SwaggerAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(SecurityBasicAuthFilter.class)
-    @ConditionalOnProperty(name = "coctrl.swagger.certifiable", havingValue = "true")
+    @ConditionalOnProperty(name = "kangaroohy.swagger.certifiable", havingValue = "true")
     public SecurityBasicAuthFilter securityBasicAuthFilter(SwaggerProperties properties) {
         return new SecurityBasicAuthFilter(properties.getCertifiable(), properties.getUsername(), properties.getPassword());
     }
 
     @Bean
     @ConditionalOnMissingBean(ProductionSecurityFilter.class)
-    @ConditionalOnProperty(name = "coctrl.swagger.prod", havingValue = "true")
+    @ConditionalOnProperty(name = "kangaroohy.swagger.prod", havingValue = "true")
     public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties) {
         return new ProductionSecurityFilter(properties.getProd());
     }
