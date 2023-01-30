@@ -2,11 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.coctrl</groupId>
+    <groupId>com.kangaroohy</groupId>
     <artifactId>swagger-spring-boot-starter</artifactId>
-    <version>0.0.5</version>
+    <version>1.0.1</version>
     <name>swagger-spring-boot-starter</name>
-    <description>swagger2文档封装工具</description>
+    <description>swagger2文档基于knife4j二次封装工具</description>
+    <url>https://github.com/kangaroo1122/swagger-spring-boot-starter</url>
 
     <properties>
         <java.version>1.8</java.version>
@@ -20,6 +21,28 @@
         <swagger-model.version>1.5.24</swagger-model.version>
         <lombok.version>1.18.24</lombok.version>
     </properties>
+
+    <organization>
+        <name>kangaroo1122</name>
+        <url>https://www.kangaroohy.com</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>kangaroo1122</name>
+            <email>326170945@qq.com</email>
+            <organization>kangaroo1122</organization>
+            <organizationUrl>https://www.kangaroohy.com</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/kangaroo1122/swagger-spring-boot-starter</url>
+        <connection>https://github.com/kangaroo1122/swagger-spring-boot-starter.git</connection>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/kangaroo1122/swagger-spring-boot-starter/issues</url>
+    </issueManagement>
 
     <dependencies>
         <dependency>
@@ -74,4 +97,70 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <name>oss nexus repository hosting</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>oss nexus repository hosting</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <!--生成源码插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--javadoc生成插件		-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- jar等文件签名插件，用于生成asc签名文件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>gpg</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

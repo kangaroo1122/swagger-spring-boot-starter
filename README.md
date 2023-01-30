@@ -1,8 +1,22 @@
-#swagger-spring-boot-starter
+# swagger-spring-boot-starter
 
 knife4j 2.0.5 封装工具包
 
 使用指南可参考：https://blog.csdn.net/Vampire_1122/article/details/126799595
+
+### maven
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.kangaroohy/swagger-spring-boot-starter.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.kangaroohy%22%20AND%20a%3A%swagger-spring-boot-starter%22)
+
+~~~xml
+<dependency>
+  <groupId>com.kangaroohy</groupId>
+  <artifactId>swagger-spring-boot-starter</artifactId>
+  <version>1.0.0</version>
+</dependency>
+~~~
+
+### 使用
 
 默认情况下，只需要controller层添加注解 @Api 即可自动扫描接口
 
@@ -11,7 +25,7 @@ knife4j 2.0.5 封装工具包
 访问地址：http://localhost:{port}/doc.html
 
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     ......
 ```
@@ -19,7 +33,7 @@ coctrl:
 认证访问
 
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     certifiable: true
     username: admin # 默认admin
@@ -29,7 +43,7 @@ coctrl:
 生产屏蔽
 
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     prod: true
 ```
@@ -50,7 +64,7 @@ coctrl:
 
 可配置正则调整匹配条件
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     anon: '^.*/pub/.*$'
     authc: '^((?!/pub/).)*$'
@@ -62,7 +76,7 @@ coctrl:
 
 可配置分组信息
 ```yaml
-coctrl:
+kangaroohy:
   swagger:
     group:
       - group-name: 分组一
@@ -77,6 +91,8 @@ coctrl:
 
 - 分组一-需认证
 - 分组二-无认证
+
+### 分组校验
 
 新增或编辑接口，实体分组显示
 

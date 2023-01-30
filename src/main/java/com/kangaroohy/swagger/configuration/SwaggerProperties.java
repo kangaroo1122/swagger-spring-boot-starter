@@ -1,4 +1,4 @@
-package com.coctrl.swagger.configuration;
+package com.kangaroohy.swagger.configuration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "coctrl.swagger")
+@ConfigurationProperties(prefix = "kangaroohy.swagger")
 public class SwaggerProperties {
 
     /**
@@ -110,17 +110,17 @@ public class SwaggerProperties {
         /**
          * 服务说明url，服务条款
          */
-        private String termsOfServiceUrl = "http//www.coctrl.com";
+        private String termsOfServiceUrl = "";
 
         /**
          * licence，许可证
          */
-        private String license = "coctrl";
+        private String license = "";
 
         /**
          * license url，许可网址
          */
-        private String licenseUrl = "www.coctrl.com";
+        private String licenseUrl = "";
 
         /**
          * 接口作者联系方式
@@ -132,17 +132,17 @@ public class SwaggerProperties {
             /**
              * 用户名
              */
-            private String name = "重庆格工自动化控制设备有限公司";
+            private String name = "";
 
             /**
              * 联系地址
              */
-            private String url = "www.coctrl.com";
+            private String url = "";
 
             /**
              * 邮箱
              */
-            private String email = "server@coctrl.com";
+            private String email = "";
         }
     }
 }

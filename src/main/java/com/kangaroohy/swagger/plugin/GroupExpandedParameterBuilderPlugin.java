@@ -1,4 +1,4 @@
-package com.coctrl.swagger.plugin;
+package com.kangaroohy.swagger.plugin;
 
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.service.AllowableValues;

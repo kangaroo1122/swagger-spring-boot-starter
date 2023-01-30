@@ -1,4 +1,4 @@
-package com.coctrl.swagger.plugin;
+package com.kangaroohy.swagger.plugin;
 
 import org.springframework.http.MediaType;
 import springfox.documentation.spi.DocumentationType;

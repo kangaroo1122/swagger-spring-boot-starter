@@ -1,4 +1,4 @@
-package com.coctrl.swagger.plugin;
+package com.kangaroohy.swagger.plugin;
 
 import com.fasterxml.classmate.ResolvedType;
 import com.fasterxml.classmate.members.ResolvedField;

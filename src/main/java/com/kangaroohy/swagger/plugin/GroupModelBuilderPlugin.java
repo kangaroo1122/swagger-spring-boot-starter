@@ -1,4 +1,4 @@
-package com.coctrl.swagger.plugin;
+package com.kangaroohy.swagger.plugin;
 
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;

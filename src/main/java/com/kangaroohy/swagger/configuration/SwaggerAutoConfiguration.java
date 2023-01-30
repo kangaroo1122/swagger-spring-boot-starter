@@ -1,4 +1,4 @@
-package com.coctrl.swagger.configuration;
+package com.kangaroohy.swagger.configuration;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;
@@ -40,7 +40,7 @@ public class SwaggerAutoConfiguration {
     private final DefaultListableBeanFactory context;
 
     @Autowired
-    public SwaggerAutoConfiguration(SwaggerProperties properties, DefaultListableBeanFactory context){
+    public SwaggerAutoConfiguration(SwaggerProperties properties, DefaultListableBeanFactory context) {
         this.properties = properties;
         this.context = context;
         config();
@@ -83,7 +83,7 @@ public class SwaggerAutoConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
-                .groupName(properties.getGroupName() + "-待认证")
+                .groupName(properties.getGroupName() + "-需认证")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.regex(properties.getAuthc()))
@@ -106,14 +106,14 @@ public class SwaggerAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(SecurityBasicAuthFilter.class)
-    @ConditionalOnProperty(name = "coctrl.swagger.certifiable", havingValue = "true")
+    @ConditionalOnProperty(name = "kangaroohy.swagger.certifiable", havingValue = "true")
     public SecurityBasicAuthFilter securityBasicAuthFilter(SwaggerProperties properties) {
         return new SecurityBasicAuthFilter(properties.getCertifiable(), properties.getUsername(), properties.getPassword());
     }
 
     @Bean
     @ConditionalOnMissingBean(ProductionSecurityFilter.class)
-    @ConditionalOnProperty(name = "coctrl.swagger.prod", havingValue = "true")
+    @ConditionalOnProperty(name = "kangaroohy.swagger.prod", havingValue = "true")
     public ProductionSecurityFilter productionSecurityFilter(SwaggerProperties properties) {
         return new ProductionSecurityFilter(properties.getProd());
     }
