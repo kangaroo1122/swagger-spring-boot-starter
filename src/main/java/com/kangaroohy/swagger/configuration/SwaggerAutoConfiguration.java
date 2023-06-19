@@ -52,7 +52,7 @@ public class SwaggerAutoConfiguration {
             for (int i = 0; i < groupList.size(); i++) {
                 SwaggerProperties.Group group = groupList.get(i);
                 Docket docket;
-                if (group.getCertifiable()) {
+                if (group.getCertifiable().equals(Boolean.TRUE)) {
                     docket = new Docket(DocumentationType.SWAGGER_2)
                             .useDefaultResponseMessages(false)
                             .apiInfo(apiInfo())
@@ -79,6 +79,7 @@ public class SwaggerAutoConfiguration {
     }
 
     @Bean(value = "defaultApi")
+    @ConditionalOnProperty(name = "kangaroohy.swagger.enable-default", havingValue = "true")
     public Docket defaultApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
@@ -93,6 +94,7 @@ public class SwaggerAutoConfiguration {
     }
 
     @Bean(value = "pubApi")
+    @ConditionalOnProperty(name = "kangaroohy.swagger.enable-default", havingValue = "true")
     public Docket pubApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)

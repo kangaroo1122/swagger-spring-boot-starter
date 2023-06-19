@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kangaroohy</groupId>
     <artifactId>swagger-spring-boot-starter</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>swagger-spring-boot-starter</name>
     <description>swagger2文档基于knife4j二次封装工具</description>
     <url>https://github.com/kangaroo1122/swagger-spring-boot-starter</url>
@@ -19,7 +19,7 @@
         <jackson-databind.version>2.10.5</jackson-databind.version>
         <knife4j.version>2.0.5</knife4j.version>
         <swagger-model.version>1.5.24</swagger-model.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.26</lombok.version>
     </properties>
 
     <organization>
