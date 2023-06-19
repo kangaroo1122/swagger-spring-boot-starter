@@ -41,6 +41,11 @@ public class SwaggerProperties {
     private String password = "123321";
 
     /**
+     * 是否开启默认分组
+     */
+    private Boolean enableDefault = true;
+
+    /**
      * 分组名
      */
     private String groupName = "默认分组";
