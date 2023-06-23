@@ -1,5 +1,6 @@
 package com.kangaroohy.swagger.configuration;
 
+import com.kangaroohy.enums.PathSelectorsType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class SwaggerProperties {
     /**
      * 是否添加认证访问
      */
-    private Boolean certifiable = false;
+    private Boolean basicAuth = false;
 
     /**
      * 访问用户名
@@ -41,31 +42,19 @@ public class SwaggerProperties {
     private String password = "123321";
 
     /**
+     * 授权header
+     */
+    private String authHeader = "token";
+
+    /**
      * 是否开启默认分组
      */
     private Boolean enableDefault = true;
 
     /**
-     * 分组名
+     * 扫描路径，全局配置，分组不配置时，使用此配置
      */
-    private String groupName = "默认分组";
-
-    /**
-     * 授权header
-     */
-    private String header = "token";
-
-    /**
-     * 待认证 路径正则<br/>
-     * 配置未生效时，可尝试用英文单引号将内容引起来
-     */
-    private String authc = "^((?!/pub/).)*$";
-
-    /**
-     * 无认证 路径正则<br/>
-     * 配置未生效时，可尝试用英文单引号将内容引起来
-     */
-    private String anon = "^.*/pub/.*$";
+    private String apis;
 
     /**
      * 分组信息
@@ -82,17 +71,27 @@ public class SwaggerProperties {
         /**
          * 分组名称
          */
-        private String groupName;
+        private String groupName = "默认分组";
 
         /**
-         * 扫描路径
+         * 扫描路径，与paths配合，会同时生效，也可单独配置
          */
         private String apis;
 
         /**
-         * 分组是否需要验证
+         * 路径选择器，默认为包下任意路径
          */
-        private Boolean certifiable = false;
+        private PathSelectorsType pathSelectors = PathSelectorsType.ANY;
+
+        /**
+         * 扫描路径配置，正则 或者 ant 格式路径都可以，配合 pathSelectors 使用
+         */
+        private String paths;
+
+        /**
+         * 分组是否需要验证请求头
+         */
+        private Boolean auth = false;
     }
 
     @Data
