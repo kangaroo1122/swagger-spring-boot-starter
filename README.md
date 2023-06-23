@@ -12,7 +12,7 @@ knife4j 2.0.5 封装工具包
 <dependency>
   <groupId>com.kangaroohy</groupId>
   <artifactId>swagger-spring-boot-starter</artifactId>
-  <version>1.0.0</version>
+  <version>${lastVersion}</version>
 </dependency>
 ~~~
 
@@ -35,7 +35,7 @@ kangaroohy:
 ```yaml
 kangaroohy:
   swagger:
-    certifiable: true
+    basic-auth: true
     username: admin # 默认admin
     password: 123321 # 默认123321
 ```
@@ -62,13 +62,11 @@ kangaroohy:
 - 默认分组-需认证
 - 默认分组-无认证
 
-可配置正则调整匹配条件
-```yaml
-kangaroohy:
-  swagger:
-    anon: '^.*/pub/.*$'
-    authc: '^((?!/pub/).)*$'
-```
+对应正则匹配条件如下：
+
+待认证正则: `^.*/pub/.*$`
+
+无需认证正则: `^((?!/pub/).)*$`
 
 方式二
 
@@ -79,12 +77,16 @@ kangaroohy:
 kangaroohy:
   swagger:
     group:
-      - group-name: 分组一
-        apis: com.kangaroohy.controller.auth
-        certifiable: true
+      - group-name: 分组一 # 分组名称
+        apis: com.kangaroohy.controller # 扫描包路径，不配置则会扫描 @Api 注解
+        path-selectors: ant # 默认any，任意路径，还支持 ant、regex、none
+        paths: /api/**  # 配合 path-selectors 使用
+        auth: true  # 此分组是否需要设置授权头
       - group-name: 分组二
-        apis: com.kangaroohy.controller.pub
-        certifiable: false
+        apis: com.kangaroohy.controller
+        path-selectors: regex
+        paths: '^((?!/pub/).)*$'
+        auth: false
 ```
 
 此时，显示的分组会新增以下两个
