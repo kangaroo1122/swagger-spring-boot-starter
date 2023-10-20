@@ -21,7 +21,7 @@ import springfox.documentation.swagger.common.SwaggerPluginSupport;
  */
 @Configuration
 @ConditionalOnClass(Docket.class)
-public class ValidGroupAutoConfiguration {
+public class CustomPluginAutoConfiguration {
 
     @Bean
     @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 1000)
@@ -39,6 +39,12 @@ public class ValidGroupAutoConfiguration {
     @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 1000)
     public GroupModelPropertyBuilderPlugin groupModelPropertyBuilderPlugin() {
         return new GroupModelPropertyBuilderPlugin();
+    }
+
+    @Bean
+    @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 1000)
+    public DisplayEnumPlugin displayEnumPlugin() {
+        return new DisplayEnumPlugin();
     }
 
     @Bean
