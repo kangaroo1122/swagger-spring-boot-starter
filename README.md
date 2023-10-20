@@ -95,6 +95,56 @@ kangaroohy:
 - 分组一-需认证
 - 分组二-无认证
 
+### 枚举展示，类注解`@ApiModelEnum`
+
+- 1、属性上必须要有`@ApiModelProperty`注解
+- 2、如果字段的属性不是枚举，但是是枚举映射，如：1男，0女，可以设置`@ApiModelProperty`注解的nodes值为枚举的全路径，如：com.kangaroohy.GenderEnum
+- 3、重写枚举的`toString()`方法可以改变展示的值
+
+#### 枚举
+~~~java
+@ApiModelEnum
+@Getter
+public enum GenderEnum {
+    MALE(0, "男"),
+    FEMALE(1, "女"),
+    UNKNOWN(2, "未知");
+    private final Integer code;
+    private final String desc;
+    GenderEnum(Integer code, String desc) {
+        this.code = code;
+        this.desc = desc;
+    }
+    /**
+     * 单个枚举的展示，不重写默认展示为 name()
+     */
+    @Override
+    public String toString() {
+        return code + "-" + desc;
+    }
+}
+~~~
+
+#### 使用
+~~~java
+@Data
+public class UserVo {
+    @ApiModelProperty("用户名")
+    private String username;
+    /**
+     * notes 是对应枚举类的全限定名
+     */
+    @ApiModelProperty(value = "性别", notes = "com.kangaroohy.GenderEnum")
+    private Integer gender;
+    
+    @ApiModelProperty(value = "性别")
+    private GenderEnum genderEnum;
+}
+~~~
+
+#### 展示如下
+![img.png](img.png)
+
 ### 分组校验
 
 新增或编辑接口，实体分组显示
