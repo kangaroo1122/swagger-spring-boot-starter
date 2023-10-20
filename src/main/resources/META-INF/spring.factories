@@ -1,4 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
   com.kangaroohy.swagger.configuration.SwaggerAutoConfiguration,\
-  com.kangaroohy.swagger.configuration.ValidGroupAutoConfiguration
+  com.kangaroohy.swagger.configuration.CustomPluginAutoConfiguration
