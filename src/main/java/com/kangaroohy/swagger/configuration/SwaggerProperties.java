@@ -92,6 +92,11 @@ public class SwaggerProperties {
          * 分组是否需要验证请求头
          */
         private Boolean auth = false;
+
+        /**
+         * 生效环境，比如生产环境不希望某个分组展示
+         */
+        private String[] profilesActive = new String[0];
     }
 
     @Data
