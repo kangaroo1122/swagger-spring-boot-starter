@@ -82,6 +82,7 @@ kangaroohy:
         path-selectors: ant # 默认any，任意路径，还支持 ant、regex、none
         paths: /api/**  # 配合 path-selectors 使用
         auth: true  # 此分组是否需要设置授权头
+        profiles-active: test # 表示此分组下的api在test环境才展示，不设置则都展示，可以多个：dev,test
       - group-name: 分组二
         apis: com.kangaroohy.controller
         path-selectors: regex

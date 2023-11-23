@@ -1,3 +1,7 @@
+## 1.0.5
+
+- 新增分组生效配置 `kangaroohy.swagger.group[0].profiles-active`，指定该分组在配置环境下展示
+
 ## 1.0.4
 
 - 新增`@ApiModelEnum`类注解，用于枚举展示

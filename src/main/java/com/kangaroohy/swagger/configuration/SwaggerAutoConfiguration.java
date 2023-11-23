@@ -6,11 +6,14 @@ import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
 import com.google.common.base.Predicate;
 import com.kangaroohy.enums.PathSelectorsType;
 import io.swagger.annotations.Api;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
@@ -24,6 +27,7 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -37,17 +41,18 @@ import static com.google.common.collect.Lists.newArrayList;
 @EnableSwagger2
 @EnableKnife4j
 @EnableConfigurationProperties(SwaggerProperties.class)
-public class SwaggerAutoConfiguration {
+public class SwaggerAutoConfiguration implements ApplicationContextAware {
 
     private final SwaggerProperties properties;
 
     private final DefaultListableBeanFactory context;
 
+    private String[] profile = new String[0];
+
     @Autowired
     public SwaggerAutoConfiguration(SwaggerProperties properties, DefaultListableBeanFactory context) {
         this.properties = properties;
         this.context = context;
-        config();
     }
 
     private void config() {
@@ -59,6 +64,9 @@ public class SwaggerAutoConfiguration {
         if (groupList != null) {
             for (int i = 0; i < groupList.size(); i++) {
                 SwaggerProperties.Group group = groupList.get(i);
+                if (verifyActive(group.getProfilesActive())) {
+                    continue;
+                }
                 Docket docket;
                 if (!StringUtils.hasText(group.getApis())) {
                     group.setApis(properties.getApis());
@@ -87,6 +95,20 @@ public class SwaggerAutoConfiguration {
                 context.registerSingleton("swaggerGroup" + i, docket);
             }
         }
+    }
+
+    private boolean verifyActive(String[] profilesActive) {
+        boolean skip = false;
+        if (profilesActive.length > 0 && profile.length > 0) {
+            skip = true;
+            for (String active : profilesActive) {
+                if (Arrays.asList(profile).contains(active)) {
+                    skip = false;
+                    break;
+                }
+            }
+        }
+        return skip;
     }
 
     @Bean
@@ -169,5 +191,15 @@ public class SwaggerAutoConfiguration {
             default:
                 throw new RuntimeException("PathSelectors error");
         }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.profile = applicationContext.getEnvironment().getActiveProfiles();
+        if (this.profile.length == 0) {
+            this.profile = new String[1];
+            this.profile[0] = "default";
+        }
+        config();
     }
 }
