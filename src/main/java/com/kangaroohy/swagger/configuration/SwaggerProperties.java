@@ -3,7 +3,6 @@ package com.kangaroohy.swagger.configuration;
 import com.kangaroohy.enums.PathSelectorsType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
  * @since 0.0.1
  */
 @Data
-@Component
 @ConfigurationProperties(prefix = "kangaroohy.swagger")
 public class SwaggerProperties {
 
