@@ -3,6 +3,7 @@ package com.kangaroohy.swagger.plugin;
 import com.kangaroohy.validator.constraints.EnumInteger;
 import com.kangaroohy.validator.constraints.EnumString;
 import com.fasterxml.jackson.databind.introspect.AnnotatedField;
+import io.swagger.annotations.ApiModelProperty;
 import springfox.documentation.builders.ModelPropertyBuilder;
 import springfox.documentation.service.AllowableListValues;
 import springfox.documentation.service.AllowableRangeValues;
@@ -50,6 +51,18 @@ public class GroupModelPropertyBuilderPlugin implements ModelPropertyBuilderPlug
         if (annotationNotNull != null && inGroups(annotationNotNull.groups(), groups)) {
             required.accept(propertyObject, true);
         }
+        NotBlank annotationNotBlank = (NotBlank) getAnnotation.apply(annotationObject, NotBlank.class);
+        if (annotationNotBlank != null && inGroups(annotationNotBlank.groups(), groups)) {
+            required.accept(propertyObject, true);
+        }
+        NotEmpty annotationNotEmpty = (NotEmpty) getAnnotation.apply(annotationObject, NotEmpty.class);
+        if (annotationNotEmpty != null && inGroups(annotationNotEmpty.groups(), groups)) {
+            required.accept(propertyObject, true);
+        }
+        ApiModelProperty annotationApiModelProperty = (ApiModelProperty) getAnnotation.apply(annotationObject, ApiModelProperty.class);
+        if (annotationApiModelProperty != null && annotationApiModelProperty.required()) {
+            required.accept(propertyObject, true);
+        }
         Size annotationSize = (Size) getAnnotation.apply(annotationObject, Size.class);
         if (annotationSize != null && inGroups(annotationSize.groups(), groups)) {
             allowableValues.accept(propertyObject, new AllowableRangeValues(Integer.toString(annotationSize.min()), Integer.toString(annotationSize.max())));
@@ -94,7 +107,7 @@ public class GroupModelPropertyBuilderPlugin implements ModelPropertyBuilderPlug
             }
             // 实体类配置默认Default接口，配置bean validation同样生成swagger
             for (Class pg : parentGroups) {
-                if(pg.equals(Default.class)){
+                if(pg.isInstance(Default.class) || pg.equals(Default.class) || Default.class.isAssignableFrom(pg)){
                     return true;
                 }
             }

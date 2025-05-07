@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kangaroohy</groupId>
     <artifactId>swagger-spring-boot-starter</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <name>swagger-spring-boot-starter</name>
     <description>swagger2文档基于knife4j二次封装工具</description>
     <url>https://github.com/kangaroo1122/swagger-spring-boot-starter</url>
