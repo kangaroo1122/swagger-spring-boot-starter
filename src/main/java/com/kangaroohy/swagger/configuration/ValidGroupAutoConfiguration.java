@@ -42,6 +42,12 @@ public class ValidGroupAutoConfiguration {
     }
 
     @Bean
+    @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 999)
+    public PositionModelPropertyBuilderPlugin positionModelPropertyBuilderPlugin() {
+        return new PositionModelPropertyBuilderPlugin();
+    }
+
+    @Bean
     @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 1000)
     public GroupExpandedParameterBuilderPlugin groupExpandedParameterBuilderPlugin() {
         return new GroupExpandedParameterBuilderPlugin();

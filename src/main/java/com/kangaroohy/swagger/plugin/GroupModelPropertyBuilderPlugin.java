@@ -38,6 +38,8 @@ public class GroupModelPropertyBuilderPlugin implements ModelPropertyBuilderPlug
         apply(field, AnnotatedField::getAnnotation,
                 context.getBuilder(), ModelPropertyBuilder::isHidden, ModelPropertyBuilder::required,
                 ModelPropertyBuilder::allowableValues, ModelPropertyBuilder::pattern, documentationType.groups);
+
+        PositionModelPropertyBuilderPlugin.autoSetPosition(context);
     }
 
     public static <A, P> void apply(A annotationObject, BiFunction<A, Class, Annotation> getAnnotation,
