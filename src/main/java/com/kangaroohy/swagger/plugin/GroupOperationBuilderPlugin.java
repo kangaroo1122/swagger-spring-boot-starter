@@ -55,8 +55,11 @@ public class GroupOperationBuilderPlugin implements OperationBuilderPlugin {
     public void apply(OperationContext context) {
         RequestMappingContext requestMappingContext = (RequestMappingContext) ReflectionUtils.getField(REQUEST_CONTEXT, context);
 
+        Optional<Deprecated> deprecated = requestMappingContext.findControllerAnnotation(Deprecated.class);
+
         // 查找方法参数group参数
-        Operation operation = context.operationBuilder().build();
+        Operation operation = deprecated.isPresent() ? context.operationBuilder().deprecated("true").build() : context.operationBuilder().build();
+
         operation.getParameters().stream()
                 .filter(parameter -> "body".equals(parameter.getParamType()))
                 .forEach(parameter ->
