@@ -1,4 +1,8 @@
 
+## 1.0.11
+
+- 如果controller有@Deprecated，则类和类下接口都做deprecated展示
+
 ## 1.0.9
 
 - 文档响应字段展示顺序按照实体顺序展示，不看`@ApiModelProperty(position = xxx)`

@@ -1,6 +1,7 @@
 package com.kangaroohy.swagger.plugin;
 
 import com.google.common.base.Optional;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +17,8 @@ import springfox.documentation.spi.service.contexts.RequestMappingContext;
 import javax.validation.Valid;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.function.BiFunction;
 
 /**
@@ -56,9 +59,22 @@ public class GroupOperationBuilderPlugin implements OperationBuilderPlugin {
         RequestMappingContext requestMappingContext = (RequestMappingContext) ReflectionUtils.getField(REQUEST_CONTEXT, context);
 
         Optional<Deprecated> deprecated = requestMappingContext.findControllerAnnotation(Deprecated.class);
+        Optional<Api> apiAnnotation = requestMappingContext.findControllerAnnotation(Api.class);
 
+        Operation operation;
         // 查找方法参数group参数
-        Operation operation = deprecated.isPresent() ? context.operationBuilder().deprecated("true").build() : context.operationBuilder().build();
+        if (deprecated.isPresent()) {
+            if (apiAnnotation.isPresent()) {
+                String tagValue = "⚠️过时-" + (apiAnnotation.get().tags().length > 0
+                        ? apiAnnotation.get().tags()[0]
+                        : apiAnnotation.get().value());
+                operation = context.operationBuilder().tags(new HashSet<>(Collections.singletonList(tagValue))).deprecated("true").build();
+            } else {
+                operation = context.operationBuilder().deprecated("true").build();
+            }
+        } else {
+            operation = context.operationBuilder().build();
+        }
 
         operation.getParameters().stream()
                 .filter(parameter -> "body".equals(parameter.getParamType()))
